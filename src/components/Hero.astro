@@ -1,0 +1,119 @@
+---
+import HeroDescription from "./HeroDescription";
+---
+
+<section class="hero-section">
+
+  <!-- Blob indigo - kiri atas -->
+  <div class="hero-blob hero-blob-top" aria-hidden="true">
+    <div class="hero-blob-shape hero-blob-indigo"></div>
+  </div>
+
+  <!-- Blob amber - kanan bawah -->
+  <div class="hero-blob hero-blob-bottom" aria-hidden="true">
+    <div class="hero-blob-shape hero-blob-amber"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container relative z-10 flex flex-col items-center text-center gap-7">
+
+    <!-- Headline -->
+    <h1 class="fade-up fade-up-2 max-w-[700px] text-[clamp(36px,6vw,56px)] font-bold leading-[1.1] tracking-[-0.03em] text-text-primary">
+      Wujudkan Bisnis Anda<br />
+      <span class="hero-gradient-text">di Dunia Digital</span>
+    </h1>
+
+    <!-- Sub -->
+    <div class="fade-up fade-up-3">
+      <HeroDescription client:load />
+    </div>
+
+    <!-- CTA -->
+    <div class="fade-up fade-up-4 flex gap-3 flex-wrap justify-center">
+      <a href="#kontak" class="btn btn-primary btn-lg">Konsultasi Gratis</a>
+      <a href="#portofolio" class="btn btn-secondary btn-lg">Lihat Karya Kami</a>
+    </div>
+
+
+  </div>
+</section>
+
+<style>
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 40px;
+  background-color: var(--color-bg);
+  overflow-x: clip; /* cegah scroll horizontal dari blob */
+  overflow-y: visible; /* biarkan blob bawah bleeding ke section berikutnya */
+}
+
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* BLOBS */
+.hero-blob {
+  position: absolute;
+  inset-x: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.hero-blob-top    { top: -200px; }
+.hero-blob-bottom { bottom: -280px; }
+
+.hero-blob-shape {
+  position: relative;
+  aspect-ratio: 1155 / 678;
+  width: 72rem;
+  max-width: none;
+  opacity: 0.25;
+  clip-path: polygon(
+    74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%,
+    80.7% 2%,   72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%,
+    47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%,
+    17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%
+  );
+}
+
+.hero-blob-indigo {
+  left: calc(50% - 30rem);
+  transform: rotate(30deg);
+  background: linear-gradient(135deg, #818CF8 0%, #3730A3 50%, #E0E7FF 100%);
+}
+
+.hero-blob-amber {
+  left: calc(50% + 8rem);
+  transform: rotate(-15deg);
+  background: linear-gradient(135deg, #FFFBEB 0%, #FDE68A 40%, #F59E0B 100%);
+}
+
+[data-theme="dark"] .hero-blob-indigo {
+  background: linear-gradient(135deg, #4F46E5 0%, #1E1B4B 50%, #312E81 100%);
+  opacity: 0.35;
+}
+
+[data-theme="dark"] .hero-blob-amber {
+  background: linear-gradient(135deg, #1A1508 0%, #292010 40%, #D97706 100%);
+  opacity: 0.3;
+}
+
+[data-theme="dark"] .hero-gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 640px) {
+  .hero-section { padding: 100px 0 64px; }
+}
+</style>

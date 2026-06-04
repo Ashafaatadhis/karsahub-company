@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar";
+import BlogList from "../../components/BlogList";
+
+const allPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const posts = allPosts.map(p => ({
+  id: p.id,
+  title: p.data.title,
+  excerpt: p.data.excerpt,
+  category: p.data.category,
+  date: p.data.date.toLocaleDateString("id-ID", {
+    day: "numeric", month: "long", year: "numeric",
+  }),
+}));
+
+const categories = [...new Set(allPosts.map(p => p.data.category))];
+---
+
+<Layout title="Blog - KarsaHub" description="Tips dan insight seputar website, otomasi n8n, dan integrasi AI untuk bisnis lokal.">
+  <Navbar client:load />
+
+  <div class="blog-page">
+    <!-- Header -->
+    <div class="blog-header">
+      <div class="container">
+        <a href="/" class="blog-back">&larr; Beranda</a>
+        <div class="section-header">
+          <div class="section-label">Blog</div>
+          <h1 class="section-title">Tips & Insight Digital</h1>
+          <p class="section-sub">Artikel praktis seputar website, otomasi n8n, dan integrasi AI untuk bisnis lokal Indonesia.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- List -->
+    <div class="container blog-content">
+      <BlogList posts={posts} categories={categories} client:load />
+    </div>
+  </div>
+</Layout>
+
+<style>
+.blog-page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: 80px;
+}
+
+.blog-header {
+  padding: 120px 0 56px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 48px;
+}
+
+.blog-back {
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-bottom: 32px;
+  transition: color 150ms;
+}
+.blog-back:hover { color: var(--color-text-primary); }
+
+.blog-content { padding-top: 0; }
+</style>

@@ -1,0 +1,143 @@
+---
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const categoryColors: Record<string, string> = {
+  Website: "indigo",
+  Otomasi: "amber",
+  AI: "indigo",
+};
+---
+
+<section class="section blog-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Blog</div>
+      <h2 class="section-title">Tips & Insight Digital untuk Bisnis Anda</h2>
+      <p class="section-sub">Artikel praktis seputar website, otomasi, dan AI untuk UMKM.</p>
+    </div>
+
+    <div class="blog-grid">
+      {posts.map((post) => {
+        const color = categoryColors[post.data.category] ?? "indigo";
+        return (
+          <a href={`/blog/${post.id}`} class="blog-card reveal">
+            <div class={`blog-cat blog-cat-${color}`}>{post.data.category}</div>
+            <h3 class="blog-title">{post.data.title}</h3>
+            <p class="blog-excerpt">{post.data.excerpt}</p>
+            <div class="blog-footer">
+              <span class="blog-date">
+                {post.data.date.toLocaleDateString("id-ID", {
+                  day: "numeric", month: "long", year: "numeric"
+                })}
+              </span>
+              <span class="blog-read">Baca &rarr;</span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <div class="blog-cta reveal">
+      <a href="/blog" class="btn btn-secondary">Lihat Semua Artikel</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.blog-section { background: var(--color-bg); }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
+
+.blog-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 200ms, transform 200ms, border-color 200ms;
+}
+.blog-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+}
+
+.blog-cat {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+.blog-cat-indigo {
+  background: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+.blog-cat-amber {
+  background: var(--color-accent-200);
+  color: var(--color-accent-600);
+}
+
+.blog-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.blog-excerpt {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}
+
+.blog-date {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.blog-read {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary-800);
+  transition: color 150ms;
+}
+.blog-card:hover .blog-read { color: var(--color-primary-600); }
+
+.blog-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+</style>

@@ -1,0 +1,179 @@
+---
+---
+
+<section id="layanan" class="section has-bottom-glow">
+  <div class="section-bottom-glow section-bottom-glow-indigo section-bottom-glow-right" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Layanan</div>
+      <h2 class="section-title">Semua yang Dibutuhkan Bisnis Anda</h2>
+      <p class="section-sub">Dari website sederhana hingga sistem otomasi kompleks, kami handle semuanya.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Website Profesional</h3>
+        <p class="service-desc">Landing page, company profile, toko online, hingga web app custom yang cepat, aman, dan mudah dikelola.</p>
+        <ul class="service-list">
+          <li>Desain modern dan responsif</li>
+          <li>SEO-ready dari awal</li>
+          <li>CMS yang mudah dipakai</li>
+          <li>Hosting dan domain setup</li>
+        </ul>
+        <a href="#kontak" class="service-link">Pelajari lebih lanjut &rarr;</a>
+      </div>
+
+      <div class="service-card service-card-featured reveal">
+        <div class="service-badge">Paling Diminati</div>
+        <div class="service-icon service-icon-accent">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Otomasi n8n</h3>
+        <p class="service-desc">Hubungkan aplikasi bisnis Anda: WhatsApp, Google Sheets, email, marketplace, dan biarkan sistem bekerja otomatis.</p>
+        <ul class="service-list">
+          <li>Integrasi 400+ aplikasi</li>
+          <li>Notif otomatis WhatsApp</li>
+          <li>Sinkronisasi data real-time</li>
+          <li>Setup dan training included</li>
+        </ul>
+        <a href="#kontak" class="service-link">Pelajari lebih lanjut &rarr;</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Integrasi AI</h3>
+        <p class="service-desc">Tambahkan kecerdasan buatan ke bisnis Anda: chatbot AI, analisis data otomatis, dan fitur cerdas lainnya.</p>
+        <ul class="service-list">
+          <li>Chatbot AI untuk website</li>
+          <li>Analisis sentimen ulasan</li>
+          <li>Rekomendasi produk otomatis</li>
+          <li>Custom AI pipeline</li>
+        </ul>
+        <a href="#kontak" class="service-link">Pelajari lebih lanjut &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+
+.service-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.service-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+}
+
+.service-card-featured {
+  border-color: var(--color-primary-100);
+  background: linear-gradient(160deg, var(--color-primary-50) 0%, var(--color-surface) 60%);
+}
+
+.service-badge {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-primary-800);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.service-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-800);
+  border: 1px solid var(--color-border);
+}
+.service-icon-accent {
+  background: var(--color-accent-50);
+  color: var(--color-accent-600);
+  border-color: var(--color-accent-200);
+}
+
+.service-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.service-desc {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.service-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.service-list li {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  padding-left: 18px;
+  position: relative;
+}
+.service-list li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent-500);
+  font-weight: 700;
+}
+
+.service-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary-800);
+  text-decoration: none;
+  transition: color 150ms;
+}
+.service-link:hover { color: var(--color-primary-600); }
+</style>

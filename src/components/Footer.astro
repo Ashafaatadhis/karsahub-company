@@ -1,0 +1,128 @@
+---
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo logo-light">Karsa<span class="logo-hub">Hub</span></a>
+      <p class="footer-tagline">Mewujudkan karsa menjadi digital nyata.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title">Layanan</div>
+        <a href="#layanan">Website Profesional</a>
+        <a href="#layanan">Otomasi n8n</a>
+        <a href="#layanan">Integrasi AI</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Perusahaan</div>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#portofolio">Portofolio</a>
+        <a href="#harga">Harga</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Kontak</div>
+        <a href="mailto:hello@karsahub.id">hello@karsahub.id</a>
+        <a href="https://wa.me/6281214768087" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; 2024 KarsaHub. Hak cipta dilindungi.</p>
+    <p>Dibuat dengan penuh semangat untuk bisnis lokal Indonesia</p>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background: var(--color-primary-950);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 64px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 64px;
+  padding-bottom: 48px;
+}
+@media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 10px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.footer-social a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 150ms;
+}
+.footer-social a:hover { color: rgba(255,255,255,0.8); }
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+@media (max-width: 480px) { .footer-links { grid-template-columns: repeat(2, 1fr); } }
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.footer-col a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 150ms;
+}
+.footer-col a:hover { color: rgba(255,255,255,0.85); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-bottom p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+</style>

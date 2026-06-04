@@ -1,0 +1,59 @@
+---
+interface Props {
+  color?: "indigo" | "amber";
+  side?: "left" | "center" | "right";
+}
+
+const { color = "indigo", side = "center" } = Astro.props;
+
+const positions = {
+  left:   "left: -80px",
+  center: "left: 50%; transform: translateX(-50%)",
+  right:  "right: -80px",
+};
+
+const gradients = {
+  indigo: {
+    light: "rgba(79,70,229,0.2) 0%, rgba(55,48,163,0.08) 50%, transparent 75%",
+    dark:  "rgba(99,102,241,0.3) 0%, rgba(67,56,202,0.12) 50%, transparent 75%",
+  },
+  amber: {
+    light: "rgba(245,158,11,0.18) 0%, rgba(217,119,6,0.07) 50%, transparent 75%",
+    dark:  "rgba(251,191,36,0.22) 0%, rgba(245,158,11,0.1) 50%, transparent 75%",
+  },
+};
+
+const g = gradients[color];
+const pos = positions[side];
+---
+
+<div class="glow-divider" aria-hidden="true">
+  <div
+    class="glow-blob"
+    style={`${pos}; --glow-light: ${g.light}; --glow-dark: ${g.dark};`}
+  ></div>
+</div>
+
+<style>
+.glow-divider {
+  position: relative;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glow-blob {
+  position: absolute;
+  top: -220px;
+  width: 680px;
+  height: 440px;
+  border-radius: 50%;
+  filter: blur(70px);
+  background: radial-gradient(ellipse at center, var(--glow-light));
+}
+
+[data-theme="dark"] .glow-blob {
+  background: radial-gradient(ellipse at center, var(--glow-dark));
+}
+</style>

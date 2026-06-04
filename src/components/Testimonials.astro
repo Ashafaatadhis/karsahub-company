@@ -1,0 +1,123 @@
+---
+---
+
+<section class="section has-bottom-glow">
+  <div class="section-bottom-glow section-bottom-glow-amber section-bottom-glow-left" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Testimoni</div>
+      <h2 class="section-title">Kata Klien Kami</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Website kami jadi jauh lebih profesional dan penjualan online naik 3x lipat dalam 2 bulan. Tim KarsaHub sangat responsif dan paham kebutuhan bisnis kami."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">B</div>
+          <div>
+            <div class="author-name">Budi Santoso</div>
+            <div class="author-role">Owner, TokoBaju.id</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Sistem otomasi n8n yang mereka buat menghemat 4 jam kerja admin kami setiap hari. Return of investment-nya jelas dan terasa langsung."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sari Dewi</div>
+            <div class="author-role">Manager Operasional, Resto Nusantara</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Chatbot AI untuk klinik kami luar biasa. Pasien bisa booking 24 jam dan kami tidak perlu angkat telepon terus. KarsaHub benar-benar mengerti UMKM."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Dr. Andi Wijaya</div>
+            <div class="author-role">Pemilik, Klinik Sehat</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+.testimonial-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow 200ms, transform 200ms;
+}
+.testimonial-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.stars {
+  color: var(--color-accent-500);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  flex: 1;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.author-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary-100);
+  color: var(--color-primary-800);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.author-role {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+</style>
