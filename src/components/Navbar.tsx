@@ -52,6 +52,16 @@ export default function Navbar() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const handleMobileNav = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      else window.location.href = `/#${hash}`;
+    }, 200);
+  };
+
   const isDark = theme === "dark";
   const pillBg = scrolled
     ? isDark ? "rgba(22,22,30,0.88)" : "rgba(250,250,250,0.88)"
@@ -164,11 +174,11 @@ export default function Navbar() {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <a href="/#layanan" className="nav-link-mobile" onClick={closeMenu}>Layanan</a>
-                <a href="/#cara-kerja" className="nav-link-mobile" onClick={closeMenu}>Cara Kerja</a>
-                <a href="/#portofolio" className="nav-link-mobile" onClick={closeMenu}>Portofolio</a>
-                <a href="/#harga" className="nav-link-mobile" onClick={closeMenu}>Harga</a>
-                <a href="/#kontak" className="nav-link-mobile nav-link-cta" onClick={closeMenu}>Mulai Proyek</a>
+                <a href="/#layanan" className="nav-link-mobile" onClick={e => handleMobileNav(e, "layanan")}>Layanan</a>
+                <a href="/#cara-kerja" className="nav-link-mobile" onClick={e => handleMobileNav(e, "cara-kerja")}>Cara Kerja</a>
+                <a href="/#portofolio" className="nav-link-mobile" onClick={e => handleMobileNav(e, "portofolio")}>Portofolio</a>
+                <a href="/#harga" className="nav-link-mobile" onClick={e => handleMobileNav(e, "harga")}>Harga</a>
+                <a href="/#kontak" className="nav-link-mobile nav-link-cta" onClick={e => handleMobileNav(e, "kontak")}>Mulai Proyek</a>
               </motion.div>
             )}
           </AnimatePresence>
