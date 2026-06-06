@@ -4,12 +4,49 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  type?: "website" | "article";
+  articleDate?: Date;
+  keywords?: string;
 }
 
 const {
-  title = "KarsaHub - Wujudkan Karsa Digitalmu",
-  description = "KarsaHub, agency digital lokal yang membangun website profesional, otomasi n8n, dan integrasi AI untuk bisnis Anda.",
+  title = "KarsaHub - Jasa Website, Otomasi N8N & Integrasi AI untuk UMKM",
+  description = "KarsaHub adalah agency digital lokal yang membangun website profesional, otomasi workflow dengan n8n, dan integrasi AI untuk bisnis lokal Indonesia. Mulai dari Rp 200rb.",
+  ogImage = "/og-image.png",
+  type = "website",
+  articleDate,
+  keywords = "jasa website, agency digital Indonesia, otomasi n8n, integrasi AI, website UMKM, website profesional murah, website toko online, chatbot AI, automation workflow",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+const siteName = "KarsaHub";
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "KarsaHub",
+  description: "Agency digital lokal spesialis website profesional, otomasi n8n, dan integrasi AI untuk UMKM Indonesia.",
+  url: "https://karsahub.biz.id",
+  email: "ashafaatadhis@gmail.com",
+  telephone: "+6281214768087",
+  priceRange: "Rp 200.000 - Rp 5.000.000",
+  areaServed: {
+    "@type": "Country",
+    name: "Indonesia",
+  },
+  serviceType: ["Web Development", "N8N Automation", "AI Integration"],
+  founder: {
+    "@type": "Person",
+    name: "Adhis Mauliyahsa Ashafaat",
+    email: "ashafaatadhis@gmail.com",
+  },
+  sameAs: [
+    "https://github.com/Ashafaatadhis",
+    "https://www.linkedin.com/in/adhis-mauliyahsa-ashafaat-2446781bb",
+  ],
+};
 ---
 
 <!doctype html>
@@ -17,9 +54,47 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
+
+  <!-- Primary SEO -->
   <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <meta name="author" content="KarsaHub" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:locale" content="id_ID" />
+  {type === "article" && articleDate && (
+    <meta property="article:published_time" content={articleDate.toISOString()} />
+  )}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="vkEnCJt97esL2Bz7dxkeQu2cWaDSRX80Igky_9K7-P8" />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- JSON-LD Structured Data -->
+  {type === "website" && (
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  )}
+
   <!-- Anti-flash: set theme sebelum render -->
   <script is:inline>
     (function () {

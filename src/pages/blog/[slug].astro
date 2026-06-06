@@ -22,7 +22,14 @@ const categoryColors: Record<string, string> = {
 const color = categoryColors[post.data.category] ?? "indigo";
 ---
 
-<Layout title={`${post.data.title} - KarsaHub`} description={post.data.excerpt}>
+<Layout
+  title={`${post.data.title} - KarsaHub Blog`}
+  description={post.data.excerpt}
+  type="article"
+  articleDate={post.data.date}
+  ogImage={`/og/${post.id}.png`}
+  keywords={`${post.data.category}, KarsaHub, ${post.data.title}`}
+>
   <Navbar client:load />
   <div class="post-page">
     <div class="post-hero">
