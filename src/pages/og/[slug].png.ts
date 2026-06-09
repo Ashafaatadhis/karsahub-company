@@ -1,5 +1,5 @@
-import type { APIRoute, GetStaticPaths } from "astro";
-import { fetchPosts } from "../../utils/payload";
+import type { APIRoute } from "astro";
+import { fetchPostBySlug } from "../../utils/payload";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { readFileSync } from "fs";
@@ -8,32 +8,25 @@ import { resolve } from "path";
 const fontRegular = readFileSync(resolve("node_modules/@fontsource/inter/files/inter-latin-400-normal.woff"));
 const fontBold = readFileSync(resolve("node_modules/@fontsource/inter/files/inter-latin-700-normal.woff"));
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await fetchPosts();
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: {
-      title: post.title,
-      excerpt: post.excerpt,
-      category: post.category,
-      date: new Date(post.date).toLocaleDateString("id-ID", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      }),
-    },
-  }));
-};
+export const GET: APIRoute = async ({ params }) => {
+  const { slug } = params;
+  const post = await fetchPostBySlug(slug!);
 
-export const GET: APIRoute = async ({ props }) => {
-  const { title, excerpt, category, date } = props as {
-    title: string;
-    excerpt: string;
-    category: string;
-    date: string;
-  };
+  if (!post) {
+    return new Response("Not found", { status: 404 });
+  }
+
+  const title = post.title;
+  const excerpt = post.excerpt;
+  const category = post.category;
+  const date = new Date(post.date).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   const svg = await satori(
+    // @ts-expect-error satori accepts plain objects
     {
       type: "div",
       props: {
@@ -170,7 +163,7 @@ export const GET: APIRoute = async ({ props }) => {
   const resvg = new Resvg(svg, { fitTo: { mode: "width", value: 1200 } });
   const png = resvg.render().asPng();
 
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: { "Content-Type": "image/png" },
   });
 };
