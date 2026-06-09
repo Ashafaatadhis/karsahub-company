@@ -172,8 +172,22 @@ const color = categoryColors[post.category] ?? "indigo";
   flex-direction: column;
   gap: 8px;
 }
-.post-body :global(li) { color: var(--color-text-secondary); }
+.post-body :global(ul) {
+  list-style-type: disc;
+}
+.post-body :global(ol) {
+  list-style-type: decimal;
+}
+.post-body :global(li) {
+  color: var(--color-text-secondary);
+  display: list-item;
+}
 .post-body :global(strong) { color: var(--color-text-primary); font-weight: 600; }
+.post-body :global(hr) {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 32px 0;
+}
 .post-body :global(blockquote) {
   border-left: 3px solid var(--color-primary-300);
   padding: 12px 20px;

@@ -112,6 +112,10 @@ function renderNode(node: LexicalNode): string {
     return `<a href="${escapeHtml(url)}"${target}>${renderChildren(node.children || [])}</a>`;
   }
 
+  if (type === "horizontalrule") {
+    return "<hr>";
+  }
+
   if (type === "upload" && node.value) {
     const url = getMediaUrl(node.value.url) || "";
     const alt = node.value.alt || "";
