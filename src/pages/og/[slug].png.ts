@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { fetchPosts } from "../../utils/payload";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { readFileSync } from "fs";
@@ -9,14 +9,14 @@ const fontRegular = readFileSync(resolve("node_modules/@fontsource/inter/files/i
 const fontBold = readFileSync(resolve("node_modules/@fontsource/inter/files/inter-latin-700-normal.woff"));
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection("blog");
+  const posts = await fetchPosts();
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.slug },
     props: {
-      title: post.data.title,
-      excerpt: post.data.excerpt,
-      category: post.data.category,
-      date: post.data.date.toLocaleDateString("id-ID", {
+      title: post.title,
+      excerpt: post.excerpt,
+      category: post.category,
+      date: new Date(post.date).toLocaleDateString("id-ID", {
         day: "numeric",
         month: "long",
         year: "numeric",

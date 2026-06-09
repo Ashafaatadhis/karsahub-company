@@ -1,9 +1,8 @@
 ---
-import { getCollection } from "astro:content";
+import { fetchPosts, getMediaUrl } from "../utils/payload";
 
-const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const allPosts = await fetchPosts();
+const posts = allPosts.slice(0, 3);
 
 const categoryColors: Record<string, string> = {
   Website: "indigo",
@@ -22,19 +21,27 @@ const categoryColors: Record<string, string> = {
 
     <div class="blog-grid">
       {posts.map((post) => {
-        const color = categoryColors[post.data.category] ?? "indigo";
+        const color = categoryColors[post.category] ?? "indigo";
+        const coverUrl = getMediaUrl(post.cover?.url);
         return (
-          <a href={`/blog/${post.id}`} class="blog-card reveal">
-            <div class={`blog-cat blog-cat-${color}`}>{post.data.category}</div>
-            <h3 class="blog-title">{post.data.title}</h3>
-            <p class="blog-excerpt">{post.data.excerpt}</p>
-            <div class="blog-footer">
-              <span class="blog-date">
-                {post.data.date.toLocaleDateString("id-ID", {
-                  day: "numeric", month: "long", year: "numeric"
-                })}
-              </span>
-              <span class="blog-read">Baca &rarr;</span>
+          <a href={`/blog/${post.slug}`} class="blog-card reveal">
+            {coverUrl && (
+              <div class="blog-cover">
+                <img src={coverUrl} alt={post.title} loading="lazy" />
+              </div>
+            )}
+            <div class="blog-card-body">
+              <div class={`blog-cat blog-cat-${color}`}>{post.category}</div>
+              <h3 class="blog-title">{post.title}</h3>
+              <p class="blog-excerpt">{post.excerpt}</p>
+              <div class="blog-footer">
+                <span class="blog-date">
+                  {new Date(post.date).toLocaleDateString("id-ID", {
+                    day: "numeric", month: "long", year: "numeric",
+                  })}
+                </span>
+                <span class="blog-read">Baca &rarr;</span>
+              </div>
             </div>
           </a>
         );
@@ -61,10 +68,9 @@ const categoryColors: Record<string, string> = {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 28px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   text-decoration: none;
   box-shadow: var(--shadow-sm);
   transition: box-shadow 200ms, transform 200ms, border-color 200ms;
@@ -73,6 +79,30 @@ const categoryColors: Record<string, string> = {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
   border-color: var(--color-border-strong);
+}
+
+.blog-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.blog-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms;
+}
+.blog-card:hover .blog-cover img {
+  transform: scale(1.05);
+}
+
+.blog-card-body {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
 }
 
 .blog-cat {

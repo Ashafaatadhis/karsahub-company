@@ -1,23 +1,25 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar";
 import BlogList from "../../components/BlogList";
+import { fetchPosts, getMediaUrl } from "../../utils/payload";
 
-const allPosts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allPosts = await fetchPosts();
 
-const posts = allPosts.map(p => ({
-  id: p.id,
-  title: p.data.title,
-  excerpt: p.data.excerpt,
-  category: p.data.category,
-  date: p.data.date.toLocaleDateString("id-ID", {
-    day: "numeric", month: "long", year: "numeric",
+const posts = allPosts.map((p) => ({
+  id: p.slug,
+  title: p.title,
+  excerpt: p.excerpt,
+  category: p.category,
+  date: new Date(p.date).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   }),
+  cover: getMediaUrl(p.cover?.url),
 }));
 
-const categories = [...new Set(allPosts.map(p => p.data.category))];
+const categories = [...new Set(allPosts.map((p) => p.category))];
 ---
 
 <Layout title="Blog - KarsaHub" description="Tips dan insight seputar website, otomasi n8n, dan integrasi AI untuk bisnis lokal.">

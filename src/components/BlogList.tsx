@@ -6,6 +6,7 @@ interface Post {
   excerpt: string;
   date: string;
   category: string;
+  cover?: string | null;
 }
 
 const POSTS_PER_PAGE = 6;
@@ -202,6 +203,11 @@ export default function BlogList({ posts, categories }: { posts: Post[]; categor
             const c = categoryColors[post.category];
             return (
               <a key={post.id} href={`/blog/${post.id}`} className="bl-card">
+                {post.cover && (
+                  <div className="bl-cover">
+                    <img src={post.cover} alt={post.title} loading="lazy" />
+                  </div>
+                )}
                 <div className="bl-cat" style={{ background: c?.bg, color: c?.text }}>
                   {post.category}
                 </div>
@@ -320,10 +326,9 @@ export default function BlogList({ posts, categories }: { posts: Post[]; categor
           background: var(--color-surface);
           border: 1px solid var(--color-border);
           border-radius: var(--radius-lg);
-          padding: 28px;
+          overflow: hidden;
           display: flex;
           flex-direction: column;
-          gap: 12px;
           text-decoration: none;
           box-shadow: var(--shadow-sm);
           transition: box-shadow 200ms, transform 200ms, border-color 200ms;
@@ -332,6 +337,28 @@ export default function BlogList({ posts, categories }: { posts: Post[]; categor
           box-shadow: var(--shadow-md);
           transform: translateY(-2px);
           border-color: var(--color-border-strong);
+        }
+        .bl-card > *:not(.bl-cover) {
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+        .bl-card > .bl-cat { margin-top: 20px; }
+        .bl-card > .bl-footer { margin-bottom: 20px; }
+
+        .bl-cover {
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+        }
+        .bl-cover img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 300ms;
+        }
+        .bl-card:hover .bl-cover img {
+          transform: scale(1.05);
         }
 
         .bl-cat {
